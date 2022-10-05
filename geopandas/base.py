@@ -1057,8 +1057,14 @@ GeometryCollection
         GeoSeries.geom_equals_exact
 
         """
+        warnings.warn(
+            "`geom_almost_equals` is deprecated and will be removed in"
+            "GeoPandas 0.12. Use the `geom_equals_exact` instead",
+            FutureWarning,
+            stacklevel=2,
+        )
         return _binary_op(
-            "geom_almost_equals", self, other, decimal=decimal, align=align
+            "geom_equals_exact", self, other, tolerance=0.5 * 10 ** (-decimal), align=align
         )
 
     def geom_equals_exact(self, other, tolerance, align=True):
